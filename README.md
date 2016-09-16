@@ -12,15 +12,15 @@ STICKY ANYTHING WITHOUT CLONING IT - JQUERY PLUGIN
 
 DESCRIPTION
 -----------
-This plugin based on Sticky Anything plugin from Mark Senff. https://github.com/senff/Sticky-Anything
+This plugin (including this readme) based on Sticky Anything plugin from Mark Senff. https://github.com/senff/Sticky-Anything
 
 It is heavily modified.
 
 Main differences:
-- Working without cloning the element. Cloning the element consume more CPU and RAM. Also can be dangerous, if cloned element has az ID.
-- Not using a setInterval, based on load, scroll and resize events.
+- Working without cloning the element. Cloning the element consume more CPU and RAM. Also can be dangerous, if cloned element has a unique ID.
+- Based on load, scroll and resize events, without using setInterval.
 - Theoretically possible, to apply selector more then once. More below.
-- Can apply a class if element is fixed.
+- Can apply class(es) if element is fixed.
 
 The Sticky anything without cloning it plugin allows you to make any element on your page "sticky" as soon as it hits the top of the page when you scroll down. Although this is commonly used to keep menus at the top of your page, the plugin actually allows you to make ANY element sticky (such as a Call To Action box, a logo, etc.)
 
