@@ -108,7 +108,7 @@ If your page has any elements that may obscure/overlap your sticky element, you 
 Don't be lazy by assigning a value of 99999 -- that's definitely like shooting a mosquito with a bazooka. Although it'll probably work, it's often unnecessary. Try to find the Z-index of the element(s) that obscure(s) your sticky element, and add a few to it for your sticky one.
 
 
-#### Debug mode
+#### Class(es)
 
 Sometimes it is good, if the element, after it is fixed, has a class to identify fixed state. Mainly for design purposes:
 
