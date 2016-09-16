@@ -1,4 +1,4 @@
-Sticky anything without cloning it - JQUERY PLUGIN
+STICKY ANYTHING WITHOUT CLONING IT - JQUERY PLUGIN
 ============================================
 
 - Author: Joe Szalai & Mark Senff
@@ -13,6 +13,7 @@ Sticky anything without cloning it - JQUERY PLUGIN
 DESCRIPTION
 -----------
 This plugin based on Sticky Anything plugin from Mark Senff. https://github.com/senff/Sticky-Anything
+
 It is heavily modified.
 
 Main differences:
