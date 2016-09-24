@@ -20,7 +20,6 @@ It is heavily modified.
 
 Main differences:
 - Working without cloning the element. Cloning the element consume more CPU and RAM. Also can be dangerous, if cloned element has a unique ID.
-- Based on load, scroll and resize events, without using setInterval.
 - Theoretically possible, to apply selector more then once. More below.
 - Can apply class(es) to fixed element.
 
