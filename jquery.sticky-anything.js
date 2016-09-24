@@ -1,5 +1,31 @@
 (function($) {
 'use strict';
+
+    /**
+     * @link https://davidwalsh.name/javascript-debounce-function
+     *
+     * Here's the basic JavaScript debounce function (as taken from Underscore.js):
+     */
+
+    // Returns a function, that, as long as it continues to be invoked, will not
+    // be triggered. The function will be called after it stops being called for
+    // N milliseconds. If `immediate` is passed, trigger the function on the
+    // leading edge, instead of the trailing.
+    function debounce(func, wait, immediate) {
+        var timeout;
+        return function() {
+            var context = this, args = arguments;
+            var later = function() {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+            var callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
+    };
+
     $.fn.stickThis = function( options ) {
 
         var settings = $.extend({
@@ -7,7 +33,7 @@
             top: 0,
             minscreenwidth: 0,
             maxscreenwidth: 99999,
-            fixedClass: 'stick-it',
+            fixedClass: 'sticked',
             zindex: 1,
         }, options );
 
@@ -16,7 +42,7 @@
         // Insert an empty div, for placeholder and measuring purposes
         $( '<div></div>' ).addClass( $( this ).attr( 'class' ) ).insertAfter( this );
 
-        var runOnScreensize = function() {
+        var runThis = function( callingEvent ) {
             // Calculating actual viewport width
             var e = window, a = 'inner';
             if ( ! ( 'innerWidth' in window ) ) {
@@ -25,22 +51,24 @@
             }
             var viewport = e[ a + 'Width' ];
 
-            return ( ( viewport >= settings.minscreenwidth ) && ( viewport <= settings.maxscreenwidth ) );
+            if ( ( viewport >= settings.minscreenwidth ) && ( viewport <= settings.maxscreenwidth ) ) {
+                stickIt( settings.top, settings.zindex, settings.fixedClass, thisObject, callingEvent );
+            }
         };
 
-        var runThis = function( callingEvent ) {
-            if ( runOnScreensize ) stickIt( settings.top, settings.zindex, settings.fixedClass, thisObject, callingEvent );
-        }
+        $(window).on('resize', runThis('resize') );
 
-        $(window).on({
-             resize:function(){
-                runThis('resize');
-             },
-             scroll:function(){
-                runThis('scroll');
-            }
-        });
+        var checkElement = setInterval( function(){
+            runThis('');
+        }, 16);
 
+/*
+        $(window).on('scroll', checkElement );
+
+        var checkElement = debounce(function() {
+            runThis('');
+        }, 10);
+*/
         return this;
     };
 
@@ -79,6 +107,7 @@
         };
     }
 
+    // Example, how to use:
     $('.main-navigation').stickThis({
         fixedClass: 'floating-header',
         zindex: 3,

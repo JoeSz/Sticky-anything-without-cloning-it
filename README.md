@@ -20,7 +20,6 @@ It is heavily modified.
 
 Main differences:
 - Working without cloning the element. Cloning the element consume more CPU and RAM. Also can be dangerous, if cloned element has a unique ID.
-- Based on load, scroll and resize events, without using setInterval.
 - Theoretically possible, to apply selector more then once. More below.
 - Can apply class(es) to fixed element.
 
@@ -47,10 +46,10 @@ In your custom jQuery calls, attach the function "stickThis" to the element you 
 The following default options are provided by the plugin. None of them are required:
 
 	$('.main-menu').stickThis({
-        top: 		0,		// top position of sticky element, measured from 'ceiling'
-        minscreenwidth:	0,		// element will not be sticky when viewport width smaller than this
+        top: 		0,		        // top position of sticky element, measured from 'ceiling'
+        minscreenwidth:	0,		    // element will not be sticky when viewport width smaller than this
         maxscreenwidth: 999999,		// element will not be sticky when viewport width larger than this
-        zindex: 	1,		// z-index value of sticky element
+        zindex: 	1,		        // z-index value of sticky element
         fixedClass:	'class-name'	// add class to fixed element
     });
 
