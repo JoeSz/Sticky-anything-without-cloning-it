@@ -76,7 +76,7 @@
         }
 
         // Set element left and right position, z-index and max-width only
-        // on scoll if just become fixed or
+        // on scroll if just become fixed or
         // on resize, but only if it is fixed
         if ( fixedInit || ( isFixed && callingEvent == 'resize' ) ) {
 
