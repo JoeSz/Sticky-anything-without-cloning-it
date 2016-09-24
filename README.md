@@ -4,7 +4,7 @@ STICKY ANYTHING WITHOUT CLONING IT - JQUERY PLUGIN
 - Author: Joe Szalai
 - Original idea and concept by: Mark Senff
 - Forked from: https://github.com/senff/Sticky-Anything
-- Version: 1.0.0
+- Version: 1.2.0
 - Plugin URL: https://github.com/JoeSz/Sticky-anything-without-cloning-it
 - Author URL: http://joe.szalai.org
 - License: GNU General Public License v3 or later
@@ -19,7 +19,8 @@ This plugin (including this readme) based on Sticky Anything plugin from Mark Se
 It is heavily modified.
 
 Main differences:
-- Working without cloning the element. Cloning the element consume more CPU and RAM. Also can be dangerous, if cloned element has a unique ID.
+- Working without cloning the element. Cloning the element consume more CPU and RAM.
+  Also can be dangerous and invalid for HTML5, if cloned element has a unique ID.
 - Theoretically possible, to apply selector more then once. More below.
 - Can apply class(es) to fixed element.
 
@@ -46,11 +47,11 @@ In your custom jQuery calls, attach the function "stickThis" to the element you 
 The following default options are provided by the plugin. None of them are required:
 
 	$('.main-menu').stickThis({
-        top: 		0,		// top position of sticky element, measured from 'ceiling'
-        minscreenwidth:	0,		// element will not be sticky when viewport width smaller than this
-        maxscreenwidth: 999999,		// element will not be sticky when viewport width larger than this
-        zindex: 	1,		// z-index value of sticky element
-        fixedClass:	'class-name'	// add class to fixed element
+        top: 		    0,		        // top position of sticky element, measured from 'ceiling'
+        minscreenwidth:	0,		        // element will not be sticky when viewport width smaller than this
+        maxscreenwidth: 999999,		    // element will not be sticky when viewport width larger than this
+        zindex: 	    1,		        // z-index value of sticky element
+        fixedClass:	    'class-name'    // add class to fixed element
     });
 
 More information below.
@@ -130,6 +131,14 @@ NOTES AND RESTRICTIONS AND BUGS AND STUFF
 
 CHANGELOG
 ---------
+
+= 1.2.0 =
+* Do not run stickIt unless scroll top has changed.
+
+= 1.1.0 =
+* Change back to setInterval for scroll event, because some mobile browser don't fire scroll event untill scroll is finished.
+* Set element left and right position, z-index and max-width only on scroll if just become fixed or on resize, but only if it is fixed.
+* Minor optimizations.
 
 = 1.0.0 =
 * Initial release
