@@ -20,7 +20,7 @@ Main differences:
 - Working without cloning the element. Cloning the element consume more CPU and RAM. Also can be dangerous, if cloned element has a unique ID.
 - Based on load, scroll and resize events, without using setInterval.
 - Theoretically possible, to apply selector more then once. More below.
-- Can apply class(es) if element is fixed.
+- Can apply class(es) to fixed element.
 
 The Sticky anything without cloning it plugin allows you to make any element on your page "sticky" as soon as it hits the top of the page when you scroll down. Although this is commonly used to keep menus at the top of your page, the plugin actually allows you to make ANY element sticky (such as a Call To Action box, a logo, etc.)
 
@@ -49,7 +49,7 @@ The following default options are provided by the plugin. None of them are requi
         minscreenwidth:	0,		// element will not be sticky when viewport width smaller than this
         maxscreenwidth: 999999,		// element will not be sticky when viewport width larger than this
         zindex: 	1,		// z-index value of sticky element
-        fixedClass:	'class-name'	// add class to element if fixed
+        fixedClass:	'class-name'	// add class to fixed element
     });
 
 More information below.
@@ -110,7 +110,7 @@ Don't be lazy by assigning a value of 99999 -- that's definitely like shooting a
 
 #### Class(es)
 
-Sometimes it is good, if the element, after it is fixed, has a class to identify fixed state. Mainly for design purposes:
+This is the class what you can style, using CSS to design sticky element, on fixed positioning. Sometimes it is good, if the element, after it is fixed, has a class, to identify its fixed state. Mainly for design purposes.
 
     $('.main-menu').stickThis({
         fixedClass:'class-name'
