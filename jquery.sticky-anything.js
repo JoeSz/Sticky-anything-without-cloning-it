@@ -7,7 +7,7 @@
             top: 0,
             minscreenwidth: 0,
             maxscreenwidth: 99999,
-            fixedClass: 'stick-it',
+            fixedClass: 'sticked',
             zindex: 1,
         }, options );
 
@@ -16,7 +16,7 @@
         // Insert an empty div, for placeholder and measuring purposes
         $( '<div></div>' ).addClass( $( this ).attr( 'class' ) ).insertAfter( this );
 
-        var runOnScreensize = function() {
+        var runThis = function( callingEvent ) {
             // Calculating actual viewport width
             var e = window, a = 'inner';
             if ( ! ( 'innerWidth' in window ) ) {
@@ -25,21 +25,16 @@
             }
             var viewport = e[ a + 'Width' ];
 
-            return ( ( viewport >= settings.minscreenwidth ) && ( viewport <= settings.maxscreenwidth ) );
+            if ( ( viewport >= settings.minscreenwidth ) && ( viewport <= settings.maxscreenwidth ) ) {
+                stickIt( settings.top, settings.zindex, settings.fixedClass, thisObject, callingEvent );
+            }
         };
 
-        var runThis = function( callingEvent ) {
-            if ( runOnScreensize ) stickIt( settings.top, settings.zindex, settings.fixedClass, thisObject, callingEvent );
-        }
+        $(window).on('resize', runThis('resize') );
 
-        $(window).on({
-             resize:function(){
-                runThis('resize');
-             },
-             scroll:function(){
-                runThis('scroll');
-            }
-        });
+        var checkElement = setInterval( function(){
+            runThis('');
+        }, 16);
 
         return this;
     };
@@ -79,6 +74,7 @@
         };
     }
 
+    // Example, how to use:
     $('.main-navigation').stickThis({
         fixedClass: 'floating-header',
         zindex: 3,
