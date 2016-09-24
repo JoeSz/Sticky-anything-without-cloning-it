@@ -1,8 +1,3 @@
-/*
- * ToDo:
- *
- */
-
 (function($) {
 'use strict';
     $.fn.stickThis = function( options ) {
