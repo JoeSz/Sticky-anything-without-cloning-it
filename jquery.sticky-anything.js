@@ -12,6 +12,7 @@
         }, options );
 
         var thisObject = $( this );
+        var top = 0;
 
         // Insert an empty div, for placeholder and measuring purposes
         $( '<div></div>' ).addClass( $( this ).attr( 'class' ) ).insertAfter( this );
@@ -26,6 +27,8 @@
             var viewport = e[ a + 'Width' ];
 
             if ( ( viewport >= settings.minscreenwidth ) && ( viewport <= settings.maxscreenwidth ) ) {
+
+                // Stick it in desired viewport range
                 stickIt( settings.top, settings.zindex, settings.fixedClass, thisObject, callingEvent );
             }
         };
@@ -33,7 +36,13 @@
         $(window).on('resize', runThis('resize') );
 
         var checkElement = setInterval( function(){
-            runThis('');
+
+            // Do not run, unless scroll top has changed
+            var currentTop = ( (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop );
+            if ( top != currentTop )  {
+                top = currentTop;
+                runThis('');
+            }
         }, 16);
 
         return this;
@@ -51,18 +60,27 @@
         stickyTop += adminBarheight;
 
         if ( ( $( window ).scrollTop() >= ( ( placeholderTop - stickyTop ) - selectorHeight ) ) && ! isFixed ) {
+            // Element top reached or above desired top position and element is not fixed (yet)
+
             thisObject.addClass( fixedClass );
             thisObject.css( { 'position': 'fixed', top: stickyTop + 'px' } );
             placeholder.css( {height: selectorHeight} );
             fixedInit = true;
+
         } else if ( ( $( window ).scrollTop() < ( placeholderTop - stickyTop ) ) ) {
+            // Placeholder element top reached or below desired top position
+
             thisObject.removeClass( fixedClass );
             thisObject.removeAttr( 'style' );
             placeholder.css( {height: 0} );
         }
 
-        if ( fixedInit || isFixed && callingEvent == 'resize' ) {
-            // Calculate object position based on placeholder position
+        // Set element left and right position, z-index and max-width only
+        // on scoll if just become fixed or
+        // on resize, but only if it is fixed
+        if ( fixedInit || ( isFixed && callingEvent == 'resize' ) ) {
+
+            // Calculate element position based on placeholder position
             var placeholderRight = ( $( window ).width() - ( placeholder.offset().left + placeholder.outerWidth() ) );
 
             thisObject.css({
@@ -74,7 +92,7 @@
         };
     }
 
-    // Example, how to use:
+    // Example, how to use it:
     $('.main-navigation').stickThis({
         fixedClass: 'floating-header',
         zindex: 3,
