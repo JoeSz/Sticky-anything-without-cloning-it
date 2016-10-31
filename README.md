@@ -4,7 +4,7 @@ STICKY ANYTHING WITHOUT CLONING IT - JQUERY PLUGIN
 - Author: Joe Szalai
 - Original idea and concept by: Mark Senff
 - Forked from: https://github.com/senff/Sticky-Anything
-- Version: 1.2.0
+- Version: 1.2.2
 - Plugin URL: https://github.com/JoeSz/Sticky-anything-without-cloning-it
 - Author URL: http://joe.szalai.org
 - License: GNU General Public License v3 or later
