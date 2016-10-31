@@ -70,6 +70,11 @@
             placeholder.css( {height: selectorHeight} );
             fixedInit = true;
 
+            // Add hook after load is success
+            // Can be used e.g. refresh masonry container, etc...
+            // https://gist.github.com/JoeSz/6aa061ff48eaf1af658d3adf9d71ec37
+            if ( typeof filter !== 'undefined' ) filter.apply( 'stickAnythingOnFixed' );
+            
         } else if ( ( $( window ).scrollTop() < ( placeholderTop - stickyTop ) ) ) {
             // Placeholder element top reached or below desired top position
 
@@ -77,6 +82,11 @@
             thisObject.addClass( staticClass );
             thisObject.removeAttr( 'style' );
             placeholder.css( {height: 0} );
+            
+            // Add hook after load is success
+            // Can be used e.g. refresh masonry container, etc...
+            // https://gist.github.com/JoeSz/6aa061ff48eaf1af658d3adf9d71ec37
+            if ( typeof filter !== 'undefined' ) filter.apply( 'StickAnythingOnUnfixed' );
         }
 
         // Set element left and right position, z-index and max-width only
