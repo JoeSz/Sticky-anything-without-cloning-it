@@ -75,7 +75,7 @@
             // https://gist.github.com/JoeSz/6aa061ff48eaf1af658d3adf9d71ec37
             if ( typeof filter !== 'undefined' ) filter.apply( 'stickAnythingOnFixed' );
             
-        } else if ( ( $( window ).scrollTop() < ( placeholderTop - stickyTop ) ) ) {
+        } else if ( ( $( window ).scrollTop() < ( placeholderTop - stickyTop ) ) && isFixed ) {
             // Placeholder element top reached or below desired top position
 
             thisObject.removeClass( fixedClass );
