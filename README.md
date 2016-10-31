@@ -51,7 +51,9 @@ The following default options are provided by the plugin. None of them are requi
         minscreenwidth:	0,		        // element will not be sticky when viewport width smaller than this
         maxscreenwidth: 999999,		    // element will not be sticky when viewport width larger than this
         zindex: 	    1,		        // z-index value of sticky element
-        fixedClass:	    'class-name'    // add class to fixed element
+        fixedClass:	    'class-name',   // add class to fixed element
+	staticClass:        'class-name',   // add class if element become 'unfixed'
+        placeholderClass:   'class-name',   // add class for the placeholder
     });
 
 More information below.
@@ -112,10 +114,12 @@ Don't be lazy by assigning a value of 99999 -- that's definitely like shooting a
 
 #### Class(es)
 
-This is the class what you can style, using CSS to design sticky element, on fixed positioning. Sometimes it is good, if the element, after it is fixed, has a class, to identify its fixed state. Mainly for design purposes.
+This is the class what you can style, using CSS to design sticky element and placeholder, on fixed or ststic positioning. Sometimes it is good, if the element, after it is fixed, has a class, to identify its fixed state. Mainly for design purposes.
 
     $('.main-menu').stickThis({
-        fixedClass:'class-name'
+        fixedClass: 'class-name',
+	staticClass: 'class-name',
+        placeholderClass: 'class-name',
     });
 
 
@@ -131,6 +135,11 @@ NOTES AND RESTRICTIONS AND BUGS AND STUFF
 
 CHANGELOG
 ---------
+
+= 1.2.1 =
+* Add staticClass and placeholderClass.
+* Optimize conditional on unfixed.
+* Add hook fixed and 'unfixed' event.
 
 = 1.2.0 =
 * Do not run stickIt unless scroll top has changed.
