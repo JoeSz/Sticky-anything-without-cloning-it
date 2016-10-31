@@ -53,7 +53,7 @@
     function stickIt( stickyTop, zindex, fixedClass, staticClass, thisObject, callingEvent ) {
         var placeholder = thisObject.next();
         var placeholderTop = placeholder.offset().top;
-        var selectorHeight = thisObject.height();
+        var selectorHeight = thisObject.outerHeight();
         var isFixed = thisObject.css("position") === 'fixed';
         var fixedInit = false;
 
