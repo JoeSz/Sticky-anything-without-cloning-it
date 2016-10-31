@@ -8,6 +8,8 @@
             minscreenwidth: 0,
             maxscreenwidth: 99999,
             fixedClass: 'sticked',
+            staticClass: 'static',
+            placeholderClass: 'sticky-placeholder',
             zindex: 1,
         }, options );
 
@@ -15,7 +17,7 @@
         var top = 0;
 
         // Insert an empty div, for placeholder and measuring purposes
-        $( '<div></div>' ).addClass( $( this ).attr( 'class' ) ).insertAfter( this );
+        $( '<div></div>' ).addClass( $( this ).attr( 'class' ) ).addClass( settings.placeholderClass ).insertAfter( this );
 
         var runThis = function( callingEvent ) {
             // Calculating actual viewport width
@@ -29,7 +31,7 @@
             if ( ( viewport >= settings.minscreenwidth ) && ( viewport <= settings.maxscreenwidth ) ) {
 
                 // Stick it in desired viewport range
-                stickIt( settings.top, settings.zindex, settings.fixedClass, thisObject, callingEvent );
+                stickIt( settings.top, settings.zindex, settings.fixedClass, settings.staticClass, thisObject, callingEvent );
             }
         };
 
@@ -48,7 +50,7 @@
         return this;
     };
 
-    function stickIt( stickyTop, zindex, fixedClass, thisObject, callingEvent ) {
+    function stickIt( stickyTop, zindex, fixedClass, staticClass, thisObject, callingEvent ) {
         var placeholder = thisObject.next();
         var placeholderTop = placeholder.offset().top;
         var selectorHeight = thisObject.height();
@@ -62,6 +64,7 @@
         if ( ( $( window ).scrollTop() >= ( ( placeholderTop - stickyTop ) - selectorHeight ) ) && ! isFixed ) {
             // Element top reached or above desired top position and element is not fixed (yet)
 
+            thisObject.removeClass( staticClass );
             thisObject.addClass( fixedClass );
             thisObject.css( { 'position': 'fixed', top: stickyTop + 'px' } );
             placeholder.css( {height: selectorHeight} );
@@ -71,6 +74,7 @@
             // Placeholder element top reached or below desired top position
 
             thisObject.removeClass( fixedClass );
+            thisObject.addClass( staticClass );
             thisObject.removeAttr( 'style' );
             placeholder.css( {height: 0} );
         }
