@@ -1,4 +1,4 @@
-(function($) {
+;(function($) {
 'use strict';
     $.fn.stickThis = function( options ) {
 
@@ -14,12 +14,11 @@
         }, options );
 
         var thisObject = $( this );
-        var top = 0;
 
         // Insert an empty div, for placeholder and measuring purposes
         $( '<div></div>' ).addClass( $( this ).attr( 'class' ) ).addClass( settings.placeholderClass ).insertAfter( this );
 
-        var runThis = function( callingEvent ) {
+        var checkFixed = function( callingEvent ) {
             // Calculating actual viewport width
             var e = window, a = 'inner';
             if ( ! ( 'innerWidth' in window ) ) {
@@ -35,17 +34,23 @@
             }
         };
 
-        $(window).on('resize', runThis('resize') );
+        // Source: https://gist.github.com/killersean/6742f98122d1207cf3bd
+        function throttle(callback, limit, callingEvent) {
+            var wait = false;
+            return function() {
+                if ( wait && $(window).scrollTop() > 0 ) {
+                    return;
+                }
+                callback.call(undefined, callingEvent);
+                wait = true;
+                setTimeout(function() {
+                    wait = false;
+                }, limit);
+            };
+        }
 
-        var checkElement = setInterval( function(){
-
-            // Do not run, unless scroll top has changed
-            var currentTop = ( (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop );
-            if ( top != currentTop )  {
-                top = currentTop;
-                runThis('');
-            }
-        }, 16);
+        $(window).on('scroll', throttle(checkFixed, 50, 'scroll') );
+        $(window).on('resize', throttle(checkFixed, 50, 'resize') );
 
         return this;
     };
