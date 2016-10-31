@@ -21,8 +21,10 @@ It is heavily modified.
 Main differences:
 - Working without cloning the element. Cloning the element consume more CPU and RAM.
   Also can be dangerous and invalid for HTML5, if cloned element has a unique ID.
-- Theoretically possible, to apply selector more then once. More below.
-- Can apply class(es) to fixed element.
+- Theoretically possible (I did not tried it), to apply selector more then once. More below.
+- Add class(es) to placeholder and if element is become fixed or unfixed.
+- Throttle function for better resource management.
+- JavaScript Hooks. (More: https://gist.github.com/JoeSz/6aa061ff48eaf1af658d3adf9d71ec37)
 
 The Sticky anything without cloning it plugin allows you to make any element on your page "sticky" as soon as it hits the top of the page when you scroll down. Although this is commonly used to keep menus at the top of your page, the plugin actually allows you to make ANY element sticky (such as a Call To Action box, a logo, etc.)
 
@@ -47,13 +49,13 @@ In your custom jQuery calls, attach the function "stickThis" to the element you 
 The following default options are provided by the plugin. None of them are required:
 
 	$('.main-menu').stickThis({
-        top: 		    0,		        // top position of sticky element, measured from 'ceiling'
-        minscreenwidth:	0,		        // element will not be sticky when viewport width smaller than this
-        maxscreenwidth: 999999,		    // element will not be sticky when viewport width larger than this
-        zindex: 	    1,		        // z-index value of sticky element
-        fixedClass:	    'class-name',   // add class to fixed element
-	staticClass:        'class-name',   // add class if element become 'unfixed'
-        placeholderClass:   'class-name',   // add class for the placeholder
+        top: 		       0,		        // top position of sticky element, measured from 'ceiling'
+        minscreenwidth:    0,		        // element will not be sticky when viewport width smaller than this
+        maxscreenwidth:    999999,		    // element will not be sticky when viewport width larger than this
+        zindex: 	       1,		        // z-index value of sticky element
+        fixedClass:	       'class-name',    // add class to fixed element
+        staticClass:       'class-name',    // add class if element become 'unfixed'
+        placeholderClass:  'class-name',    // add class for the placeholder
     });
 
 More information below.
@@ -118,11 +120,16 @@ This is the class what you can style, using CSS to design sticky element and pla
 
     $('.main-menu').stickThis({
         fixedClass: 'class-name',
-	staticClass: 'class-name',
+        staticClass: 'class-name',
         placeholderClass: 'class-name',
     });
 
+#### Throttle
+Throttling enforces a maximum number of times a function can be called over time. As in "execute this function at most once every 100 milliseconds." ( https://css-tricks.com/the-difference-between-throttling-and-debouncing/ )
 
+#### JavaScript Hooks
+Essentially it's a place in code that allows you to tap in to a module to either provide different behavior or to react when something happens.
+More: https://gist.github.com/JoeSz/6aa061ff48eaf1af658d3adf9d71ec37
 
 NOTES AND RESTRICTIONS AND BUGS AND STUFF
 -----------------------------------------
@@ -135,6 +142,10 @@ NOTES AND RESTRICTIONS AND BUGS AND STUFF
 
 CHANGELOG
 ---------
+
+= 1.2.2 =
+* Add throttle function.
+Throttling enforces a maximum number of times a function can be called over time. As in "execute this function at most once every 100 milliseconds." ( https://css-tricks.com/the-difference-between-throttling-and-debouncing/ )
 
 = 1.2.1 =
 * Add staticClass and placeholderClass.
