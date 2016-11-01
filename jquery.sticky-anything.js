@@ -1,58 +1,75 @@
+/**
+ * Sticky anything without cloning it - jQuery plugin
+ *
+ * GitHub: https://github.com/JoeSz/Sticky-anything-without-cloning-it
+ *
+ * Version: 1.2.2
+ *
+ * The Sticky anything without cloning it plugin allows you to make any element on your page "sticky"
+ * as soon as it hits the top of the page when you scroll down. Although this is commonly used to keep
+ * menus at the top of your page, the plugin actually allows you to make ANY element sticky
+ * (such as a Call To Action box, a logo, etc.)
+ */
 ;(function($) {
 'use strict';
     $.fn.stickThis = function( options ) {
+        this.each(function() {
 
-        var settings = $.extend({
-            // Default
-            top: 0,
-            minscreenwidth: 0,
-            maxscreenwidth: 99999,
-            fixedClass: 'sticked',
-            staticClass: 'static',
-            placeholderClass: 'sticky-placeholder',
-            zindex: 1,
-        }, options );
+            var settings = $.extend({
+                // Default
+                top: 0,
+                minscreenwidth: 0,
+                maxscreenwidth: 99999,
+                fixedClass: 'sticked',
+                staticClass: 'static',
+                placeholderClass: 'sticky-placeholder',
+                zindex: 1,
+            }, options );
 
-        var thisObject = $( this );
+            var thisObject = $( this );
 
-        // Insert an empty div, for placeholder and measuring purposes
-        $( '<div></div>' ).addClass( $( this ).attr( 'class' ) ).addClass( settings.placeholderClass ).insertAfter( this );
+            // Insert an empty div, for placeholder and measuring purposes
+            $( '<div></div>' ).addClass( $( this ).attr( 'class' ) ).addClass( settings.placeholderClass ).insertAfter( this );
 
-        var checkFixed = function( callingEvent ) {
-            // Calculating actual viewport width
-            var e = window, a = 'inner';
-            if ( ! ( 'innerWidth' in window ) ) {
-                a = 'client';
-                e = document.documentElement || document.body;
-            }
-            var viewport = e[ a + 'Width' ];
 
-            if ( ( viewport >= settings.minscreenwidth ) && ( viewport <= settings.maxscreenwidth ) ) {
+            var checkFixed = function(callingEvent) {
 
-                // Stick it in desired viewport range
-                stickIt( settings.top, settings.zindex, settings.fixedClass, settings.staticClass, thisObject, callingEvent );
-            }
-        };
-
-        // Source: https://gist.github.com/killersean/6742f98122d1207cf3bd
-        function throttle(callback, limit, callingEvent) {
-            var wait = false;
-            return function() {
-                if ( wait && $(window).scrollTop() > 0 ) {
-                    return;
+                // Calculating actual viewport width
+                var e = window, a = 'inner';
+                if ( ! ( 'innerWidth' in window ) ) {
+                    a = 'client';
+                    e = document.documentElement || document.body;
                 }
-                callback.call(undefined, callingEvent);
-                wait = true;
-                setTimeout(function() {
-                    wait = false;
-                }, limit);
+                var viewport = e[ a + 'Width' ];
+
+                if ( ( viewport >= settings.minscreenwidth ) && ( viewport <= settings.maxscreenwidth ) ) {
+
+                    // Stick it in desired viewport range
+                    stickIt( settings.top, settings.zindex, settings.fixedClass, settings.staticClass, thisObject, callingEvent );
+                }
             };
-        }
 
-        $(window).on('scroll', throttle(checkFixed, 50, 'scroll') );
-        $(window).on('resize', throttle(checkFixed, 50, 'resize') );
+            // Source: https://gist.github.com/killersean/6742f98122d1207cf3bd
+            function throttle(callback, limit, callingEvent) {
+                var wait = false;
+                return function() {
+                    if ( wait && $(window).scrollTop() > 0 ) {
+                        return;
+                    }
+                    callback.call(undefined, callingEvent);
+                    wait = true;
+                    setTimeout(function() {
+                        wait = false;
+                    }, limit);
+                };
+            }
 
-        return this;
+            $(window).on('scroll', throttle(checkFixed, 50, 'scroll') );
+            $(window).on('resize', throttle(checkFixed, 50, 'resize') );
+
+            return this;
+
+        });
     };
 
     function stickIt( stickyTop, zindex, fixedClass, staticClass, thisObject, callingEvent ) {
@@ -79,7 +96,7 @@
             // Can be used e.g. refresh masonry container, etc...
             // https://gist.github.com/JoeSz/6aa061ff48eaf1af658d3adf9d71ec37
             if ( typeof filter !== 'undefined' ) filter.apply( 'stickAnythingOnFixed' );
-            
+
         } else if ( ( $( window ).scrollTop() < ( placeholderTop - stickyTop ) ) && isFixed ) {
             // Placeholder element top reached or below desired top position
 
@@ -87,7 +104,7 @@
             thisObject.addClass( staticClass );
             thisObject.removeAttr( 'style' );
             placeholder.css( {height: 0} );
-            
+
             // Add hook after load is success
             // Can be used e.g. refresh masonry container, etc...
             // https://gist.github.com/JoeSz/6aa061ff48eaf1af658d3adf9d71ec37
@@ -95,7 +112,7 @@
         }
 
         // Set element left and right position, z-index and max-width only
-        // on scroll if just become fixed or
+        // on scoll if just become fixed or
         // on resize, but only if it is fixed
         if ( fixedInit || ( isFixed && callingEvent == 'resize' ) ) {
 
@@ -118,4 +135,3 @@
     });
 
 }(jQuery));
-
