@@ -147,6 +147,7 @@ CHANGELOG
 * Minor bugfixes.
 
 = 1.2.2 =
+* Added each for multiple instance.
 * Add throttle function.
 Throttling enforces a maximum number of times a function can be called over time. As in "execute this function at most once every 100 milliseconds." ( https://css-tricks.com/the-difference-between-throttling-and-debouncing/ )
 
