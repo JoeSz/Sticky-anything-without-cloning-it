@@ -3,7 +3,7 @@
  *
  * GitHub: https://github.com/JoeSz/Sticky-anything-without-cloning-it
  *
- * Version: 1.2.2
+ * Version: 1.2.3
  *
  * The Sticky anything without cloning it plugin allows you to make any element on your page "sticky"
  * as soon as it hits the top of the page when you scroll down. Although this is commonly used to keep
