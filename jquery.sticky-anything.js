@@ -10,7 +10,7 @@
  * menus at the top of your page, the plugin actually allows you to make ANY element sticky
  * (such as a Call To Action box, a logo, etc.)
  */
-;(function($) {
+(function($) {
 'use strict';
     $.fn.stickThis = function( options ) {
         this.each(function() {
@@ -49,21 +49,6 @@
                 }
             };
 
-            // Source: https://gist.github.com/killersean/6742f98122d1207cf3bd
-            function throttle(callback, limit, callingEvent) {
-                var wait = false;
-                return function() {
-                    if ( wait && $(window).scrollTop() > 0 ) {
-                        return;
-                    }
-                    callback.call(undefined, callingEvent);
-                    wait = true;
-                    setTimeout(function() {
-                        wait = false;
-                    }, limit);
-                };
-            }
-
             $(window).on('scroll', throttle(checkFixed, 50, 'scroll') );
             $(window).on('resize', throttle(checkFixed, 50, 'resize') );
 
@@ -71,6 +56,21 @@
 
         });
     };
+
+    // Source: https://gist.github.com/killersean/6742f98122d1207cf3bd
+    function throttle(callback, limit, callingEvent) {
+        var wait = false;
+        return function() {
+            if ( wait && $(window).scrollTop() > 0 ) {
+                return;
+            }
+            callback.call(undefined, callingEvent);
+            wait = true;
+            setTimeout(function() {
+                wait = false;
+            }, limit);
+        };
+    }
 
     function stickIt( stickyTop, zindex, fixedClass, staticClass, thisObject, callingEvent ) {
         var placeholder = thisObject.next();
@@ -112,7 +112,7 @@
         }
 
         // Set element left and right position, z-index and max-width only
-        // on scoll if just become fixed or
+        // on scroll if just become fixed or
         // on resize, but only if it is fixed
         if ( fixedInit || ( isFixed && callingEvent == 'resize' ) ) {
 
@@ -125,7 +125,7 @@
                 right: placeholderRight,
                 'z-index': zindex
             });
-        };
+        }
     }
 
     // Example, how to use it:
@@ -135,3 +135,4 @@
     });
 
 }(jQuery));
+
