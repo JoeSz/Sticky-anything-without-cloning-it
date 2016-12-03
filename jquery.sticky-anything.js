@@ -13,7 +13,7 @@
 (function($) {
 'use strict';
     $.fn.stickThis = function( options ) {
-        this.each(function() {
+        return this.each(function() {
 
             var settings = $.extend({
                 // Default
@@ -51,8 +51,6 @@
 
             $(window).on('scroll', throttle(checkFixed, 50, 'scroll') );
             $(window).on('resize', throttle(checkFixed, 50, 'resize') );
-
-            return this;
 
         });
     };
