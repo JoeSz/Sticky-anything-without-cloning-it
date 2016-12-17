@@ -29,7 +29,7 @@
             var thisObject = $( this );
 
             // Insert an empty div, for placeholder and measuring purposes
-            $( '<div></div>' ).addClass( $( this ).attr( 'class' ) ).addClass( settings.placeholderClass ).insertAfter( this );
+            $( '<div></div>' ).addClass( $( this ).attr( 'class' ) ).addClass( settings.placeholderClass ).css( 'background-color', $( this ).css( 'backgroundColor' ) ).insertAfter( this );
 
 
             var checkFixed = function(callingEvent) {
