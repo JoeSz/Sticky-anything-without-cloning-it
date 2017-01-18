@@ -1,9 +1,12 @@
 /**
  * Sticky anything without cloning it - jQuery plugin
  *
+ * Author: Joe Szalai
+ * Website: joe.szalai.org
+ *
  * GitHub: https://github.com/JoeSz/Sticky-anything-without-cloning-it
  *
- * Version: 1.2.3
+ * Version: 1.2.4
  *
  * The Sticky anything without cloning it plugin allows you to make any element on your page "sticky"
  * as soon as it hits the top of the page when you scroll down. Although this is commonly used to keep
@@ -29,7 +32,7 @@
             var thisObject = $( this );
 
             // Insert an empty div, for placeholder and measuring purposes
-            $( '<div></div>' ).addClass( $( this ).attr( 'class' ) ).addClass( settings.placeholderClass ).css( 'background-color', $( this ).css( 'backgroundColor' ) ).insertAfter( this );
+            $( '<div></div>' ).addClass( $( this ).attr( 'class' ) ).addClass( settings.placeholderClass ).css({ 'background-color': $( this ).css( 'backgroundColor' ), 'height': '0' }).insertAfter( this );
 
 
             var checkFixed = function(callingEvent) {
@@ -133,4 +136,3 @@
     });
 
 }(jQuery));
-
