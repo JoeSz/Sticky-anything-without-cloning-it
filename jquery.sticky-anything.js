@@ -52,8 +52,22 @@
                 }
             };
 
-            $(window).on('scroll', throttle(checkFixed, 50, 'scroll') );
-            $(window).on('resize', throttle(checkFixed, 50, 'resize') );
+            /*
+             * For better user experience, if we are close to the top, check more often.
+             *
+             * @link https://stackoverflow.com/questions/24306290/lodash-debounce-not-working-in-anonymous-function/42455876#42455876
+             */
+            var throttle_fast = throttle( checkFixed, 10, 'scroll' );
+            var throttle_normal = throttle( checkFixed, 100, 'scroll' );
+
+            $( window ).on( 'scroll', function() {
+                if( $( window ).scrollTop() > 200 ) {
+                    throttle_normal();
+                } else {
+                    throttle_fast();
+                }
+            });
+            $(window).on('resize', throttle(checkFixed, 100, 'resize') );
 
         });
     };
