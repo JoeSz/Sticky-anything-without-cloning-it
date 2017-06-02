@@ -143,6 +143,9 @@ NOTES AND RESTRICTIONS AND BUGS AND STUFF
 CHANGELOG
 ---------
 
+= 1.2.5 =
+* For better user experience, if we are close to the top, check more often.
+
 = 1.2.4 =
 * Set placeholder initial height to 0, because some inherited class may have a height definied.
 
