@@ -144,9 +144,11 @@
     }
 
     // Example, how to use it:
+    /*
     $('.main-navigation').stickThis({
         fixedClass: 'floating-header',
         zindex: 3,
     });
+    */
 
 }(jQuery));
