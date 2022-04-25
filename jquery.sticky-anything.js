@@ -60,7 +60,7 @@
             var throttle_fast = throttle( checkFixed, 10, 'scroll' );
             var throttle_normal = throttle( checkFixed, 100, 'scroll' );
 
-            $( window ).on( 'scroll', function() {
+            $( window ).on( 'scroll touchmove', function() {
                 if( $( window ).scrollTop() > 200 ) {
                     throttle_normal();
                 } else {
@@ -142,9 +142,8 @@
             });
         }
     }
-
-    // Example, how to use it:
     /*
+    // Example, how to use it:
     $('.main-navigation').stickThis({
         fixedClass: 'floating-header',
         zindex: 3,
