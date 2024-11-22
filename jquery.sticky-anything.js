@@ -68,6 +68,7 @@
                 }
             });
             $(window).on('resize', throttle(checkFixed, 100, 'resize') );
+            $(window).on('stickAnything.reCalculate', throttle(checkFixed, 100, 'scroll') );
 
         });
     };
